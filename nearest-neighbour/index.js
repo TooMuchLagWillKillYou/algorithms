@@ -4,11 +4,8 @@ import pointsFactory from "./pointsFactory.js";
 const startingPoint = pointsFactory()[0];
 let processedIds = [startingPoint.id];
 nearestNeighbourOf(startingPoint);
-// const nearestNeighbour = nearestNeighbourOf(startingPoint);
-// console.log(`The neighbour of ${startingPoint.id} is ${nearestNeighbour.id}`);
-// console.log(`Processed ids are ${processedIds.join(", ")}`);
 
-function nearestNeighbourOf(theStartingPoint, recursive = true) {
+function nearestNeighbourOf(theStartingPoint) {
   let nearestNeighbour = theStartingPoint;
   let distanceAcc = 9999;
 
@@ -36,7 +33,7 @@ function nearestNeighbourOf(theStartingPoint, recursive = true) {
     const newStartingPoint = pointsFactory().find(
       (x) => x.id == nearestNeighbour.id
     );
-    nearestNeighbourOf(newStartingPoint, true);
+    nearestNeighbourOf(newStartingPoint);
   }
 
   function excludeStartingPoint(aPoint) {
