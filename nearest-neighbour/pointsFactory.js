@@ -24,9 +24,7 @@ function pointsFactory(random = false) {
     let result = [];
     for (let i = 0; i < 10; i++) {
       const id = i + 1;
-      const randomX = randomNumber();
-      const randomY = randomNumber();
-      result.push(new Point(id, randomX, randomY));
+      result.push(new Point(id, randomNumber(), randomNumber()));
     }
     return result;
   }

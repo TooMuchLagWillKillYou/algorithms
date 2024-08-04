@@ -1,28 +1,27 @@
 import Point from "./Point.js";
 import pointsFactory from "./pointsFactory.js";
 
-const startingPoint = pointsFactory()[0];
-let processedIds = [startingPoint.id];
+const points = pointsFactory();
+const startingPoint = points[0];
+const processedIds = [startingPoint.id];
 nearestNeighbourOf(startingPoint);
 
 function nearestNeighbourOf(theStartingPoint) {
   let nearestNeighbour = theStartingPoint;
   let distanceAcc = 9999;
 
-  pointsFactory()
-    .filter(excludeStartingPoint)
-    .forEach((p) => {
-      if (distanceAcc > temporaryPoint().dist) {
-        distanceAcc = temporaryPoint().dist;
-        nearestNeighbour = temporaryPoint();
-      }
+  points.filter(excludeStartingPoint).forEach((p) => {
+    if (distanceAcc > temporaryPoint().dist) {
+      distanceAcc = temporaryPoint().dist;
+      nearestNeighbour = temporaryPoint();
+    }
 
-      function temporaryPoint() {
-        const intermediateX = theStartingPoint.x - p.x;
-        const intermediateY = theStartingPoint.y - p.y;
-        return new Point(p.id, intermediateX, intermediateY);
-      }
-    });
+    function temporaryPoint() {
+      const intermediateX = theStartingPoint.x - p.x;
+      const intermediateY = theStartingPoint.y - p.y;
+      return new Point(p.id, intermediateX, intermediateY);
+    }
+  });
 
   processedIds.push(nearestNeighbour.id);
   console.log(
@@ -30,9 +29,7 @@ function nearestNeighbourOf(theStartingPoint) {
   );
 
   if (processedIds.length < 10) {
-    const newStartingPoint = pointsFactory().find(
-      (x) => x.id == nearestNeighbour.id
-    );
+    const newStartingPoint = points.find((x) => x.id == nearestNeighbour.id);
     nearestNeighbourOf(newStartingPoint);
   }
 
