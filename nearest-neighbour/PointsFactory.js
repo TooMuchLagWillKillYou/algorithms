@@ -1,7 +1,7 @@
 import Point from "./Point.js";
+import { byDistanceFromOrigin, randomNumber } from "./Utils.js";
 
 class PointsFactory {
-
   static staticPoints() {
     const result = [
       new Point(1, -1, 4),
@@ -14,8 +14,8 @@ class PointsFactory {
       new Point(8, -10, -1),
       new Point(9, 5, -9),
       new Point(10, 7, 9),
-    ]
-    return result.sort(this.byDistanceFromOrigin)
+    ];
+    return result.sort(byDistanceFromOrigin);
   }
   static randomPoints() {
     let result = [];
@@ -23,15 +23,7 @@ class PointsFactory {
       const id = i + 1;
       result.push(new Point(id, randomNumber(), randomNumber()));
     }
-    return result.sort(this.byDistanceFromOrigin);
-  }
-  byDistanceFromOrigin(a, b) {
-    return a.hypotenuse - b.hypotenuse;
-  }
-  randomNumber() {
-    let min = -10;
-    let max = 10;
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    return result.sort(byDistanceFromOrigin);
   }
 }
 
