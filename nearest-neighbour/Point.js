@@ -24,9 +24,6 @@ class Point {
   get dist() {
     return this._dist;
   }
-  get distanceFromOrigin() {
-    return Math.hypot(Math.abs(this.x), Math.abs(this.y));
-  }
 }
 
 export default Point;
