@@ -2,11 +2,9 @@ import Point from "./Point.js";
 import PointsFactory from "./PointsFactory.js";
 
 const points = new PointsFactory(false).points;
-const startingPoint = points[0];
-const processedIds = [startingPoint.id];
-const orderedPoints = [];
-nearestNeighbourOf(startingPoint);
-console.log(orderedPoints.map((p) => p.id).join(", "));
+const processedIds = [];
+nearestNeighbourOf(points[0]);
+console.log(processedIds.join(", "));
 
 function nearestNeighbourOf(theStartingPoint) {
   let nearestNeighbour = theStartingPoint;
@@ -14,10 +12,8 @@ function nearestNeighbourOf(theStartingPoint) {
 
   points.filter(excludeProcessedPoints).forEach(findNeighbourOf);
 
-  processedIds.push(nearestNeighbour.id);
-  orderedPoints.push(theStartingPoint);
-
-  if (processedIds.length <= 10) {
+  if (processedIds.length < 10) {
+    processedIds.push(theStartingPoint.id);
     const newStartingPoint = points.find((x) => x.id == nearestNeighbour.id);
     nearestNeighbourOf(newStartingPoint);
   }
@@ -43,6 +39,6 @@ function nearestNeighbourOf(theStartingPoint) {
 
 export default nearestNeighbourOf;
 
-  // console.log(
-  //   `The neighbour of ${theStartingPoint.id} is ${nearestNeighbour.id}`
-  // );
+// console.log(
+//   `The neighbour of ${theStartingPoint.id} is ${nearestNeighbour.id}`
+// );
