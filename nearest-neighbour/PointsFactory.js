@@ -2,7 +2,17 @@ import Point from "./Point.js";
 import { byDistanceFromOrigin, randomNumber } from "./Utils.js";
 
 class PointsFactory {
-  static staticPoints() {
+  constructor(generateRandomly) {
+    if (generateRandomly) {
+      this._points = this.randomPoints()
+    } else {
+      this._points = this.staticPoints();
+    }
+  }
+  get points() {
+    return this._points
+  }
+  staticPoints() {
     const result = [
       new Point(1, -1, 4),
       new Point(2, 6, -2),
@@ -17,7 +27,7 @@ class PointsFactory {
     ];
     return result.sort(byDistanceFromOrigin);
   }
-  static randomPoints() {
+  randomPoints() {
     let result = [];
     for (let i = 0; i < 10; i++) {
       const id = i + 1;
